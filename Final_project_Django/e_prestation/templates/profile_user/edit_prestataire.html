@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+    {% block h1%}<h2>Modifier votre profile</h2>{% endblock%}
+
+{% block edit_profile %}
+    <form method="post">
+        {{ edit_form|crispy}}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Sauvegarder</button>
+    </form>
+    <hr>
+    <h3>Supprimer ce profile ?</h3>
+    <form method="post">
+        {{ delete_form }}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Supprimer</button>
+    </form>
+    <hr>
+   
+         
+{% endblock %}

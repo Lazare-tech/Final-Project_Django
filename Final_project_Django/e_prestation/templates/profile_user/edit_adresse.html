@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block h1_edit_adresses%}<h2>Modifier votre adresse</h2>{% endblock%}
+
+{% block edit_Adresses %}
+
+    <form method="post">
+
+        {{ edit_form|crispy }}
+
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Sauvegarder</button>
+
+    </form>
+    <hr>
+    <h3>Supprimer l'adresse ?</h3>
+    <form method="post">
+        {{ delete_form }}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Supprimer</button>
+    </form>
+    
+
+{% endblock%}

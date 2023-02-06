@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block h1adresses %}
+<h1 class="mt-5" align="center">Adresses</h1>
+<hr class="mt-0 mb-4">
+{% endblock%}
+{% block createAdresses %}
+
+
+        <form method="post" action="{% url 'createAdresses' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+ {% endblock %}      

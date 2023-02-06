@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block h1 %}<h1 class="mt-5" align="center">Mon profile</h1>
+    <hr class="mt-0 mb-4">
+{% endblock %}
+
+{
+
+{% block  profile %}
+{% for message in messages%}
+<center>
+    <div class="alert alert-success" role="alert" style="width:700px">
+      <h4>{{message}}</h5>
+    </div>
+  </center>
+  {% endfor %}
+   {% if profile %} 
+    {% for profile in profile %}
+    <div class="card mb-3" style="max-width: 740px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{ profile.image.url }}" class="img-fluid rounded-start" alt=" Image de votre service" style="height:350px;width:500px">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+                <small class="text-muted">Nom</small>
+              <h5 class="card-title"><strong>{{profile.nom }}</strong></h5>
+              <small class="text-muted">Prenom</small>
+
+              <h5 class="card-title"><strong>{{profile.prenom }}</strong></h5>
+              <p class="card-text">{{ service.description}}</p>
+                <small class="text-muted">Occupation</small>
+              <p class="card-text">{{profile.occupation }}</p>
+              <small class="text-muted">Competences</small>
+              <p class="card-text"><h4 class="text-muted">{{profile.competences}}</h4></p>
+              <small class="text-muted">niveau d'experience</small>
+              <p class="card-text"><h4 class="text-muted">{{profile.niveauExperience}}</h4></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="card-body">
+      <a href="{% url 'edit_profile' profile.id %}" class="card-link"><button class="btn btn-primary">Modifer mon profile</button></a>
+      <a href="#" class="card-link"><button class="btn btn-danger">Supprimer</button></a>
+    </div>
+  </div>
+  {% endfor %}
+       
+    {% else %}
+        <div class="alert alert-danger" role="alert" style="width:700px">
+            <h4>Vous n'avez de profile</h5>
+            <a href="{% url 'createPrestataires' %}"><button type="button" class="btn btn-primary">Creer</button></a>
+
+        </div>
+     {% endif %}
+
+   {% endblock %}

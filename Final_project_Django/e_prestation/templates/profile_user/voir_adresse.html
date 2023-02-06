@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+
+{% block voir_adresse%}
+{% if adresse %}
+
+{% for adresse in adresse %}
+{% for message in messages%}
+<center>
+    <div class="alert alert-success" role="alert" style="width:700px">
+      <h4>{{message}}</h5>
+    </div>
+  </center>
+  {% endfor %}
+<div class="card text-center">
+    <div class="card-header">
+      {{adresse.numeroTelephone}}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{adresse.email}}</h5>
+      <h5 class="card-title">{{adresse.pays}}</h5>
+      <h5 class="card-title">{{adresse.ville}}</h5>
+      <a href="{% url 'edit_adresse' adresse.id %}" class="btn btn-primary">Modifier votre adresse</a>
+    </div>
+   
+</div>
+{% endfor %}
+{% else %}
+<center>
+    <div class="alert alert-danger" role="alert" style="width:700px">
+      <h4>Vous n'avez aucun adresse</h5>
+        <a href="{% url 'createAdresses' %}"><button type="button" class="btn btn-primary">Creer</button></a>
+
+    </div>
+
+  </center>
+{% endif %}
+
+  <hr>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+    {% block h1_edit_service%}<h2>Modifier le service</h2>{% endblock%}
+
+{% block edit_service %}
+    <form method="post">
+        {{ edit_form|crispy}}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Sauvegarder</button>
+    </form>
+    <hr>
+    <h3>Supprimer le service ?</h3>
+    <form method="post">
+        {{ delete_form }}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Supprimer</button>
+    </form>
+    <hr>
+    {% comment %} {% for service in service %} {% endcomment %}
+    {% comment %} {{service}} {% endcomment %}
+    {% comment %} {% endfor %} {% endcomment %}
+         
+{% endblock %}

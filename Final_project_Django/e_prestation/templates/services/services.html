@@ -1,0 +1,19 @@
+{% block content %}
+<div class="container">
+      <div class="row row-cols-1 row-cols-md-4 g-5">
+        {% for services in services %}
+        <div class="col">
+          <div class="card h-100">
+            <img src="{{services.image.url }}" class="card-img-top" alt="{{ services.image}}">
+            <div class="card-body">
+              <p class="card-text">{{services.titreConcert}}</p>
+              <h5 class="card-title">{{services.tarif}}</h5>
+              <a href={% url 'detail' services.id%} class="btn btn-primary">Voir plus</a>
+            </div>
+          </div>
+        </div>  
+        {% endfor %}
+    </div>
+  </div>
+    
+{% endblock %}
