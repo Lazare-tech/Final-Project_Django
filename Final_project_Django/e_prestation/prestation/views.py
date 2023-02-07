@@ -21,6 +21,7 @@ from django.contrib.auth import get_user_model
 def home(request):
     categories=Categories.objects.all()
     services=Services.objects.all()
+    #comment
    
     return render(request,'base.html',{'categories':categories,'services':services})
 #------------------------------------------------------------------------------------
