@@ -1,19 +1,51 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'star.css' %}">
+{% comment %} <link rel="stylesheet" href="{% static 'card.css' %}"> {% endcomment %}
 {% block content %}
 <div class="container">
-      <div class="row row-cols-1 row-cols-md-4 g-5">
-        {% for services in services %}
-        <div class="col">
-          <div class="card h-100">
-            <img src="{{services.image.url }}" class="card-img-top" alt="{{ services.image}}">
-            <div class="card-body">
-              <p class="card-text">{{services.titreConcert}}</p>
-              <h5 class="card-title">{{services.tarif}}</h5>
-              <a href={% url 'detail' services.id%} class="btn btn-primary">Voir plus</a>
-            </div>
-          </div>
-        </div>  
-        {% endfor %}
-    </div>
-  </div>
     
+
+
+        <div class="row">
+          {% for services in services %}
+
+          <div class="col-lg-3 col-md-4 ">
+            {% comment %} <div class="card " style="width: 28rem;"> {% endcomment %}
+
+              <div class="card-body">
+                <img src="{{services.image.url }}" class="card-img-top" alt="{{ services.image}}">
+
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+                <div class="rating-star">
+                  <span>
+                    <i class="fa fa-star{% if services.averageReview < 0.5 %}-o{% elif services.averageReview >= 0.5 and services.averageReview < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
+                    <i class="fa fa-star{% if services.averageReview < 1.5 %}-o{% elif services.averageReview >= 1.5 and services.averageReview < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
+                    <i class="fa fa-star{% if services.averageReview < 2.5 %}-o{% elif services.averageReview >= 2.5 and services.averageReview < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
+                    <i class="fa fa-star{% if services.averageReview < 3.5 %}-o{% elif services.averageReview >= 3.5 and services.averageReview < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
+                    <i class="fa fa-star{% if services.averageReview < 4.5 %}-o{% elif services.averageReview >= 4.5 and services.averageReview < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <a href={% url 'detail' services.id%} class="btn btn-primary">Voir plus</a>
+              </div>
+              
+
+            </div>
+            {% endfor %}
+
+
+          <div>
+
+      </div>
+          
+
+
+  </div>
+
+  
+    
+
 {% endblock %}

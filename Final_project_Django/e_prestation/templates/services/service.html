@@ -4,22 +4,6 @@
 <link rel="stylesheet" href="{% static "css/nav.css" %}">
 
 {% include 'nav/navbar.html'%}
-
-{% comment %} <nav class="navbar categorie fixed-top navbar-expand-lg    " style="position:relative;top:-17.5px;">
-    <h4 style="color:white">Categorie</h4>
-
-    <div class="container-fluid">
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-{% for categories in categories %}
-<ul class="navbar-nav me-auto mb-1 mb-lg-0 ">
-  <li class="nav-item ">
-    <a class="nav-link active" aria-current="page" href="{% url 'categorie_service' categories.id %}" style="text-decoration:none">{{categories.nom}}</a>
-  </li>
- {%endfor %} 
-</ul>          
-</div>
-</div>
-</nav> {% endcomment %}
  
 {% block content %}
 <div class="container">

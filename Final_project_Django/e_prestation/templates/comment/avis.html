@@ -1,0 +1,16 @@
+{% comment %} {% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block link %} <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+{% endblock%}
+
+
+{% block comment %}
+
+<form method="post">
+    {{ form_c|crispy }}
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Comment</button>
+</form>
+
+{% endblock %} {% endcomment %}

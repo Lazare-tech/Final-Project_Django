@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for message in messages%}
+<center>
+    <div class="alert alert-success" role="alert" style="width:700px">
+      <h4>{{message}}</h5>
+    </div>
+  </center>
+  {% endfor %}
+
+{% if service %}
+{% for service in service %}
+   <div class="container">
+    <p><a href="{% url 'home' %}"><button type="button" class="btn btn-primary">Home</button></a><a href="{% url 'edit_service' service.id %}">Modifier le service</a>/
+      <a href="{% url 'createServices' %}">Ajouter un service</a></p>
+
+    <div class="card mb-3" style="max-width: 740px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{ service.image.url }}" class="img-fluid rounded-start" alt=" Image de votre service" style="height:350px;width:500px">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><strong>{{ service.name }}</strong></h5>
+              <small class="text-muted">Description</small>
+              <p class="card-text">
+                {{ service.description}}</p>
+                <small class="text-muted">Phrase d'accroche</small>
+              <p class="card-text">{{ service.titreConcert }}</p>
+              <small class="text-muted">Tarif</small>
+              <p class="card-text"><h4 class="text-muted">{{service.tarif}}</h4></p>
+              <small class="text-muted">Categorie du service</small>
+              <p class="card-text"><h4 class="text-muted">{{ service.categorie}}</h4></p>
+            </div>
+          </div>
+        </div>
+      </div>
+        <hr>
+        {% endfor %}
+    </div>
+
+    
+  {% else %}
+  <center>
+  <div class="alert alert-danger" role="alert" style="width:700px">
+    <h4>Vous n'avez aucun service</h5>
+      <a href="{% url 'createServices' %}"><button type="button" class="btn btn-primary">Creer</button></a>
+  </div>
+</center>
+  
+  {% endif %}
+{% endblock content %}

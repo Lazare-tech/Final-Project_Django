@@ -1,74 +1,66 @@
+
 {% load static %}
-<link rel="stylesheet" href="{% static "css/nav.css" %}">
+{% comment %}
+<link rel="stylesheet" href="{% static " css/nav.css" %}"> {% endcomment %}
 
 {% block nav %}
-   <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">E-Prestation</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+
+<div class="container-fluid">
+  <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <a class="navbar-brand" href="#">E-prestation</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" style="position:relative;top:13px">
+      <ul class="navbar-nav mr-auto">
+        <form class="form-inline">
+          <input class="form-control mr-md-1" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+        </form>
+     </ul>
+      {% include 'connexion/index.html' %}
+
+    </div>
+  </nav>
+</div>
+<div class="container-fluid">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Categories</a>
+    {% comment %} <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> {% endcomment %}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          {% comment %} <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">Cours</a> {% endcomment %}
+          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+
+          {% comment %} <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">HTML et CSS</a>
+            <a class="dropdown-item" href="#">JavaScript</a>
+            <a class="dropdown-item" href="#">PHP et MySQL</a>
+          </div> {% endcomment %}
+        </li>
+        {% comment %} <li class="nav-item"><a class="nav-link " href="#">Articles</a></li>
+        <li class="nav-item"><a class="nav-link " href="#">Contact</a></li> {% endcomment %}
+
+        {% for categories in categories %}
+        <li class="nav-item" >
+          <a class="nav-link" aria-current="page" href="{% url 'categorie_service' categories.id %}"
+            style="text-decoration:none">{{categories.nom}}</a>
+          {% endfor %}
+        </li>      </ul>
+      {% comment %} <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button
+          </form> {% endcomment %}
           </div>
-          <ul class="navbar-nav nav">
-            <li class="nav-item">
-             {% if request.user.is_authenticated  %}
-             <button type="button" class="btn btn-light">
-              <a class="nav-link " href="{% url 'mon_profile' user.id %}">
-                  Profile!!!!             
-              </a> 
-            
-
-          </button>
-                <button type="button" class="btn">
-                    <a class="nav-link " href="{% url 'view_service' user.id %}">
-                         Mes services 
-                     </a>
-                </button>
-                <button type="button" class="btn">
-                  <a class="nav-link " href="{% url 'mon_adresse' user.id %}">
-                      Mon Adresse 
-                  </a>
-              </button>
-                {% else %}
-                <button type="button" class="btn btn-light">
-                  <a class="nav-link " href="{% url 'createPrestataires' %}">
-                        Devenez prestataire/Proposez votre service!!!!
-                  </a> 
-              </button>
-                {% endif %}
-            </li>
-          </ul>
-          {% include 'connection/index.html'%}
-
-        </div>
-      </nav>
+        </nav>
+    </div>
 
 
-      <nav class="navbar categorie fixed-top navbar-expand-lg    " style="position:relative;top:-17.5px;">
-        <h4 style="color:white">Categorie</h4>
-
-        <div class="container-fluid">
-          <h4 ><a href="{% url 'home' %}" style="color:white">Home</a></h4>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-            {% for categories in categories %}
-            <ul class="navbar-nav me-auto mb-1 mb-lg-0 ">
-              <li class="nav-item ">
-                <a class="nav-link active" aria-current="page" href="{% url 'categorie_service' categories.id %}" style="text-decoration:none">{{categories.nom}}</a>
-              </li>
-             {%endfor %} 
-             
-            </ul>
-          </div>
-
-        </div>
-      </nav>
 
 
-      {% endblock %}
+
+{% endblock %}

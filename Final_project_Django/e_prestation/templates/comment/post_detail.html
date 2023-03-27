@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.content }}</p>
+    <p>Posted by {{ post.author }} on {{ post.created_at }}</p>
+    <hr>
+    <h3>Comments</h3>
+    {% for comment in comment %}
+        {% if comment.approved_comment %}
+            <div class="comment">
+                <p class="info">Comment by {{ comment.author }} on {{ comment.created_on }}</p>
+                <p>{{ comment.content }}</p>
+            </div>
+        {% endif %}
+    {% empty %}
+        <p>No comments yet.</p>
+    {% endfor %}
+    <hr>
+    <h3>Add a comment</h3>
+    <form method="post" class="comment-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Add comment</button>
+    </form>
+{% endblock %}
