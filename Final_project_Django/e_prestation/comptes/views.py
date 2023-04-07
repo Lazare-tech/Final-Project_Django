@@ -19,7 +19,7 @@ from django.utils.encoding import force_bytes
 from django.contrib.auth.forms import PasswordResetForm
 from django.core.mail import send_mail, BadHeaderError
 from django.contrib import messages #import messages
-
+from prestation.models import Prestataires
 #.................................................................
 #class logout
 
@@ -38,7 +38,9 @@ def login_page(request):
                 username=form.cleaned_data['username'],
                 password=form.cleaned_data['password'],
             )
+            
             if user is not None:
+              
                 login(request, user)
                 return redirect('home')
         message = 'Identifiants invalides.'

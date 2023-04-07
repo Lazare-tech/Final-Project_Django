@@ -17,18 +17,50 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from .models import  ReviewRating
 from .forms import ReviewForm
+from django.http import JsonResponse
 
 # Create your views here.
 #home page
+# def prestataire_en_ligne(request):
+#     prestataire=request.user
+#     pk=prestataire.id
+#     prestataire = get_object_or_404(Prestataires, pk=pk)
+#     # return JsonResponse({'en_ligne': prestataire.en_ligne})
+
+@login_required
+def en_ligne(request):
+    prestataire = Prestataires.objects.get(author=request.user)
+    prestataire.en_ligne = True
+    prestataire.save()
+    context={
+        'prestataire':prestataire,
+    }
+    return render(request,'base.html',{'prestataire':prestataire})
+
+@login_required
+def hors_ligne(request):
+    prestataire = Prestataires.objects.get(user=request.user)
+    prestataire.en_ligne = False
+    prestataire.save()
+    return redirect('home')
+
 def home(request):
+  
+    prestataire=request.user
     categories=Categories.objects.all()
     services=Services.objects.all()
+
+    # reviews = ReviewRating.objects.filter(service_id=services.id, status=True)
+    
     
     # for service in services:
     #     ratings = Rating.objects.filter(service_id=service).first()
     #     rating=ratings.objects.filter(user=request.user)
     #     service.user_rating = rating.rating if rating else 0
-    return render(request,'base.html',{'categories':categories,'services':services})
+    return render(request,'base.html',{
+        'categories':categories,
+        'services':services,
+        })
 #
 def rate(request, service_id: int, rating: int) -> HttpResponse:
     post = Services.objects.get(id=service_id)
@@ -98,6 +130,9 @@ def edit_prestataire(request, user_id):
         'delete_form': delete_form,
         }
     return render(request,'prestataires/edit_prestataire.html',context)
+
+
+
 #------------------------------------------------------------------------------------
                         #ADRESSE
 #------------------------------------------------------------------------------------
@@ -222,22 +257,28 @@ def detail(request,id):
     
     prestataires=Prestataires.objects.filter(author=service.author)
     services=Services.objects.get(id=id)
+    
     adresses=Adresses.objects.filter(author=service.author)
     # single_product = Services.objects.get(category__slug=category_slug, slug=product_slug)
+    review = ReviewRating.objects.filter(service_id=services.id, status=True)
+    reviews_default=review.first()
     reviews = ReviewRating.objects.filter(service_id=services.id, status=True)
+
     service_gallery = ServicesGallery.objects.filter(service_id=services.id)
-    print(service_gallery)
+    # print(service_gallery)
 
     # print(services)
     # services=Services.objects.all()
 
 
     categories=Categories.objects.all()
+    user = request.user
+
     # comment=Commentaire.objects.filter(comment_id=id)
     
 
-    return render(request,'detail.html',{'adresses':adresses,'prestataires':prestataires,
-                                        'categories':categories,'services':services,'reviews':reviews,'service_gallery':service_gallery})
+    return render(request,'detail.html',{'adresses':adresses,'prestataires':prestataires,'user':user,
+                                        'categories':categories,'services':services,'reviews':reviews,'reviews_default':reviews_default,'service_gallery':service_gallery})
 #..............................................................................
 @login_required
 def add_comment(request,pk):

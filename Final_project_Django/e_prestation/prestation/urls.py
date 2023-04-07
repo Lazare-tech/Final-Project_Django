@@ -4,6 +4,7 @@ from prestation import views
 
 urlpatterns = [ 
     path('',views.home,name='home'),
+    path('',views.en_ligne,name='home'),
     path('detail/<int:id>',views.detail,name='detail'),
     path('createPrestataires',views.createPrestataires,name='createPrestataires'),
     #services

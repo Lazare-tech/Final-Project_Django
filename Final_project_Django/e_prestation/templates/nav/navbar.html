@@ -1,4 +1,3 @@
-
 {% load static %}
 {% comment %}
 <link rel="stylesheet" href="{% static " css/nav.css" %}"> {% endcomment %}
@@ -9,58 +8,49 @@
 <div class="container-fluid">
   <nav class="navbar navbar-expand-md navbar-light bg-light">
     <a class="navbar-brand" href="#">E-prestation</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent" style="position:relative;top:13px">
-      <ul class="navbar-nav mr-auto">
-        <form class="form-inline">
-          <input class="form-control mr-md-1" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+      <ul class="navbar-nav mr-auto">        
+        <div class="row">
+        <form class="d-flex">
+          <div class="col-xs-12" style="width:330px">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          </div>
+        </div>
+        <div class="row"><div class="col-xs-2 align-content-center">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+          </div>
         </form>
-     </ul>
+
+      </ul>
       {% include 'connexion/index.html' %}
 
     </div>
   </nav>
+
 </div>
+
+
 <div class="container-fluid">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Categories</a>
-    {% comment %} <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button> {% endcomment %}
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item dropdown">
-          {% comment %} <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">Cours</a> {% endcomment %}
-          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
-
-          {% comment %} <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">HTML et CSS</a>
-            <a class="dropdown-item" href="#">JavaScript</a>
-            <a class="dropdown-item" href="#">PHP et MySQL</a>
-          </div> {% endcomment %}
+          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>  
         </li>
-        {% comment %} <li class="nav-item"><a class="nav-link " href="#">Articles</a></li>
-        <li class="nav-item"><a class="nav-link " href="#">Contact</a></li> {% endcomment %}
-
         {% for categories in categories %}
-        <li class="nav-item" >
+        <li class="nav-item">
           <a class="nav-link" aria-current="page" href="{% url 'categorie_service' categories.id %}"
             style="text-decoration:none">{{categories.nom}}</a>
           {% endfor %}
-        </li>      </ul>
-      {% comment %} <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button
-          </form> {% endcomment %}
-          </div>
-        </nav>
+        </li>
+      </ul>
+   
     </div>
-
-
-
-
-
+  </nav>
+</div>
 {% endblock %}

@@ -27,7 +27,7 @@ class Prestataires(models.Model):
     competences=models.CharField(max_length=30)
     niveauExperience=models.CharField(max_length=30)
     author =models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-
+    en_ligne = models.BooleanField(default=False)
     
     #classe meta
     class Meta:
